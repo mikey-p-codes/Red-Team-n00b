@@ -1,3 +1,6 @@
+# Use this script to set positional arguments for tools used in the RTO lab.  The Domain-Recon alias exceeds the initial size limit so you can make changes to the C2 profile, or split the commands up however you see fit.
+
+
 $RUBEUSLOCATION = "C:\\Tools\\Rubeus\\Rubeus\\bin\\Release\\Rubeus.exe"; # location of Rubeus
 $SHARP = "C:\\Tools\\SharpSystemTriggers\\SharpSpoolTrigger\\bin\\Release\\SharpSpoolTrigger.exe"; # location of SharpSpoolTrigger
 
