@@ -36,7 +36,7 @@ call plug#begin('~/.vim/plugged')
 " GitHub Management
 Plug 'tpope/vim-fugitive'
 " Go Development
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Language Server Support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -47,14 +47,14 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Colorscheme (Let's say we chose gruvbox)
-Plug 'morhetz/gruvbox'
+Plug 'AlexvZyl/nordic.nvim', { 'branch': 'main' }
 
 call plug#end()
 
 " --- Plugin Configurations ---
 
 " Colorscheme
-colorscheme gruvbox
+" colorscheme nordic
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -63,23 +63,6 @@ let g:NERDTreeDirArrowCollapsible="~"
 
 " FZF
 map <C-p> :Files<CR>
-
-" vim-go
-let g:go_fmt_command = "goimports"  " Use goimports for formatting
-autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
-autocmd BufWritePre *.go :silent call go#fmt#Format(0)
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_generate_tags = 1
-
-" Key mappings for vim-go (examples)
-nmap <leader>b :GoBuild<CR>
-nmap <leader>r :GoRun<CR>
-nmap <leader>t :GoTest<CR>
 
 " coc.nvim
 " Use <tab> for completion, but also cycle through snippets
@@ -109,3 +92,10 @@ nmap <silent> gD <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 " Go-to references
 nmap <silent> gr <Plug>(coc-references)
+
+" custom mapping
+map <c-s> :w<CR>
+map <c-q> :q<CR>
+map <\> <leader>
+map <leader>g :Git<CR>
+map <leader>q :wq!<CR>
